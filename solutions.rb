@@ -7,9 +7,9 @@
 # 7. If neither winner nor board is full, go to #2.
 # 8. Play again?
 # 9. If yes, go to #1.
-require 'pry'
+# require 'pry'
 
-player_name = ""
+$player_name = ""
 INITIAL_MARKER = " "
 PLAYER_MARKER = "X"
 COMPUTER_MARKER = "O"
@@ -21,16 +21,18 @@ def prompt(msg)
   puts "=> #{msg}"
 end
 
-# def get_name
-#   system 'clear'
-#   prompt "Hey there! What's your name?"
-#   player_name = gets.chomp
-#   return player_name
-# end
+ def get_name
+   system 'clear'
+   prompt "Hey there! What's your name?"
+   $player_name = gets.chomp
+   return $player_name
+ end
+
+ get_name
 
 def display_board(brd)
   system 'clear'
-  prompt "Player, you are '#{PLAYER_MARKER}', Computer is '#{COMPUTER_MARKER}'."
+    prompt "#{$player_name}, you are '#{PLAYER_MARKER}', Computer is '#{COMPUTER_MARKER}'."
   puts ""
   puts "     |     |     "
   puts "  #{brd[1]}  |  #{brd[2]}  |  #{brd[3]}  "
@@ -83,7 +85,7 @@ end
 def detect_winner(brd)
   WINNING_COMBOS.each do |combo|
     if brd.values_at(*combo).count(PLAYER_MARKER) == 3
-      return "Player"
+        return "#{$player_name}"
     elsif brd.values_at(*combo).count(COMPUTER_MARKER) == 3
       return "Computer"
     end
@@ -112,9 +114,9 @@ loop do
   end
 
   answer = ""
-  prompt "Would you like to play again, player? (Yes or no)"
+    prompt "Would you like to play again, #{$player_name}? (Yes or no)"
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
-prompt "Thanks for playing!"
+prompt "Thanks for playing! #{$player_name}"
