@@ -70,8 +70,12 @@ def player_places_piece!(brd)
 end
 
 def computer_places_piece!(brd)
-  square = empty_squares(brd).sample
-  brd[square] = COMPUTER_MARKER
+  if brd[5] == INITIAL_MARKER
+    brd[5] = COMPUTER_MARKER
+  else
+    square = empty_squares(brd).sample
+    brd[square] = COMPUTER_MARKER
+  end
 end
 
 def board_is_full?(brd)
