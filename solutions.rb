@@ -28,7 +28,8 @@ end
    return $player_name
  end
 
- get_name
+ get_name #get_name Running the method outside of the loop, as I only need it the once. Though, every new game should have it... I suppose.
+
 
 def display_board(brd)
   system 'clear'
@@ -97,8 +98,6 @@ def detect_winner(brd)
   nil
 end
 
-#get_name Running the method outside of the loop, as I only need it the once. Though, every new game should have it... I suppose.
-
 loop do
   ttt_board = initialize_board
   display_board(ttt_board)
@@ -106,6 +105,7 @@ loop do
   loop do
     player_places_piece!(ttt_board)
     display_board(ttt_board)
+    break if board_is_full?(ttt_board) || someone_won?(ttt_board)
     computer_places_piece!(ttt_board)
     display_board(ttt_board)
     break if board_is_full?(ttt_board) || someone_won?(ttt_board)
